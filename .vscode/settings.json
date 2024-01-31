@@ -4,6 +4,10 @@
         "Iconoir",
         "Kojoko",
         "linebreak",
-        "tailwindcss"
-    ]
+        "nextjs",
+        "Supabase",
+        "tailwindcss",
+        "toploader"
+    ],
+    "cosine.AIProvider": "OpenAI"
 }
