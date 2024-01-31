@@ -5,6 +5,9 @@
     "airbnb-base"
   ],
   "rules": {
-    "no-unused-vars": "error"
+    "no-unused-vars": "error",
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off"
   }
 }
