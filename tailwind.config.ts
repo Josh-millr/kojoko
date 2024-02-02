@@ -5,7 +5,11 @@ import tailwindcssAnimate from 'tailwindcss-animate';
 
 const config = {
   darkMode: ['class'],
-  content: ['./src/components/**/*.{ts,tsx}', './src/app/**/*.{ts,tsx}'],
+  content: [
+    './src/components/**/*.{ts,tsx}',
+    './src/app/**/*.{ts,tsx}',
+    './src/hocs/**/*.{ts,tsx}',
+  ],
   prefix: '',
   theme: {
     container: {

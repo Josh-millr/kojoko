@@ -6,10 +6,9 @@ declare namespace NodeJS {
     GITHUB_ID: string;
     GITHUB_SECRET: string;
     AUTH_SECRET: string;
-    NEXT_PUBLIC_SUPABASE_URL: string;
+    SUPABASE_URL: string;
     SUPABASE_SERVICE_ROLE_KEY: string;
     SUPABASE_JWT_SECRET: string;
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: string;
     NEXT_PUBLIC_API_URL: string;
     NEXT_PUBLIC_SITE_URL: string;
   }

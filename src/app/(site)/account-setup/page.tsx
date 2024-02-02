@@ -1,10 +1,11 @@
 import { KojokoIcon } from '@/components/ui/logo/kojoko';
-// import { RegistrationCompletionForm } from './_components/registration-completion-form';
+
+import { AccountSetupForm } from './_components/account-setup-form';
 
 export default function AccountSetup() {
   return (
-    <section className="container flex place-content-center pt-20 pb-32">
-      <div className="grid gap-y-12 sm:gap-y-16 max-w-[400px] mx-auto">
+    <section className="container flex place-content-center pb-32 pt-20">
+      <div className="mx-auto grid max-w-[400px] gap-y-12 sm:gap-y-16">
         <div className="grid gap-y-10">
           <div className="flex place-content-center">
             <KojokoIcon size={32} />
@@ -17,7 +18,7 @@ export default function AccountSetup() {
             </p>
           </div>
         </div>
-        {/* <RegistrationCompletionForm /> */}
+        <AccountSetupForm />
       </div>
     </section>
   );

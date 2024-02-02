@@ -1,6 +1,8 @@
 {
     "cSpell.words": [
         "clsx",
+        "hocs",
+        "hookform",
         "Iconoir",
         "Kojoko",
         "linebreak",
@@ -9,5 +11,6 @@
         "tailwindcss",
         "toploader"
     ],
-    "cosine.AIProvider": "OpenAI"
+    "cosine.AIProvider": "OpenAI",
+    "cosine.AIModel": "Faster"
 }

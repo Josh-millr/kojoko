@@ -13,7 +13,7 @@ export const authConfig = {
   },
   providers: [GitHub, Google],
   adapter: SupabaseAdapter({
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    url: process.env.SUPABASE_URL,
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY,
   }),
   callbacks: {
