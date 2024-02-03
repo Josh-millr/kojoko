@@ -12,18 +12,16 @@ interface GlobalProvidersProps {
 }
 export function GlobalProviders({ children }: GlobalProvidersProps) {
   return (
-    <>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <IconoirProvider iconProps={defaultIconProps}>
-          <Toaster />
-          {children}
-        </IconoirProvider>
-      </ThemeProvider>
-    </>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <IconoirProvider iconProps={defaultIconProps}>
+        <Toaster />
+        {children}
+      </IconoirProvider>
+    </ThemeProvider>
   );
 }
