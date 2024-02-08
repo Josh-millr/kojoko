@@ -17,51 +17,60 @@ import { getUserIdFromSession } from '@/services/get-user-id-from-session';
 type UserProfile = Tables<'user_profiles'>[];
 type QueryResponse = PostgrestSingleResponse<UserProfile>;
 
-export async function GET(request: Request) {
-  try {
-    const userID = await getUserIdFromSession();
-    if (!userID) {
-      return returnToLogin(request.url);
-    }
+// export async function GET(request: Request) {
+//   try {
+//     const userID = await getUserIdFromSession();
+//     if (!userID) {
+//       return returnToLogin(request.url);
+//     }
 
-    const response = await new UserDatabase(
-      await supabaseClient(),
-    ).fetchUserProfile(userID);
+//     const response = await new UserDatabase(
+//       await supabaseClient(),
+//     ).fetchUserProfile(userID);
 
-    return handleResponse(response);
-  } catch {
-    return handleUnexpectedError();
-  }
+//     return handleResponse(response);
+//   } catch {
+//     return handleUnexpectedError();
+//   }
+// }
+
+// const returnToLogin = (baseUrl: string) =>
+//   NextResponse.redirect(new URL('/auth', baseUrl));
+
+// const handleResponse = (response: QueryResponse) => {
+//   if (isUserProfileAvail(response.data)) {
+//     return handleSuccess(response.data as UserProfile);
+//   }
+//   return ErrorResponse.notFound(FEEDBACK_USER_NOT_EXIST);
+// };
+
+// const isUserProfileAvail = (data: UserProfile | null) =>
+//   data && data.length > 0;
+
+// const handleSuccess = (data: UserProfile) => {
+//   const { id, ...dataWithoutId } = data[0];
+//   return NextResponse.json(
+//     {},
+//     // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
+//     { status: STATUS_OK },
+//   );
+// };
+
+// const handleUnexpectedError = () =>
+//   NextResponse.json(
+//     {},
+//     // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
+//     { status: STATUS_OK },
+//   );
+// // NextResponse.json(ErrorResponse.internalServerError(), {
+// //   status: STATUS_INTERNAL_SERVER_ERROR,
+// // });
+
+export async function GET() {
+  return Response.json({
+    data: {
+      name: 'james',
+      age: 21,
+    },
+  });
 }
-
-const returnToLogin = (baseUrl: string) =>
-  NextResponse.redirect(new URL('/auth', baseUrl));
-
-const handleResponse = (response: QueryResponse) => {
-  if (isUserProfileAvail(response.data)) {
-    return handleSuccess(response.data as UserProfile);
-  }
-  return ErrorResponse.notFound(FEEDBACK_USER_NOT_EXIST);
-};
-
-const isUserProfileAvail = (data: UserProfile | null) =>
-  data && data.length > 0;
-
-const handleSuccess = (data: UserProfile) => {
-  const { id, ...dataWithoutId } = data[0];
-  return NextResponse.json(
-    {},
-    // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
-    { status: STATUS_OK },
-  );
-};
-
-const handleUnexpectedError = () =>
-  NextResponse.json(
-    {},
-    // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
-    { status: STATUS_OK },
-  );
-// NextResponse.json(ErrorResponse.internalServerError(), {
-//   status: STATUS_INTERNAL_SERVER_ERROR,
-// });
