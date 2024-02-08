@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { NextResponse } from 'next/server';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
@@ -48,13 +49,19 @@ const isUserProfileAvail = (data: UserProfile | null) =>
 
 const handleSuccess = (data: UserProfile) => {
   const { id, ...dataWithoutId } = data[0];
-  return Response.json(
-    createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
+  return NextResponse.json(
+    {},
+    // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
     { status: STATUS_OK },
   );
 };
 
 const handleUnexpectedError = () =>
-  NextResponse.json(ErrorResponse.internalServerError(), {
-    status: STATUS_INTERNAL_SERVER_ERROR,
-  });
+  NextResponse.json(
+    {},
+    // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
+    { status: STATUS_OK },
+  );
+// NextResponse.json(ErrorResponse.internalServerError(), {
+//   status: STATUS_INTERNAL_SERVER_ERROR,
+// });
