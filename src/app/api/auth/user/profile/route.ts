@@ -10,7 +10,7 @@ import { ErrorResponse } from '@/utils/error-response';
 import { UserDatabase } from '@/services/user-database';
 import { supabaseClient } from '@/libs/supabase-client';
 import { FEEDBACK_USER_NOT_EXIST } from '@/constants/feedback-messages';
-import { createNetworkResponse } from '@/utils/create-network-response';
+// import { createNetworkResponse } from '@/utils/create-network-response';
 import { getUserIdFromSession } from '@/services/get-user-id-from-session';
 
 type UserProfile = Tables<'user_profiles'>[];
@@ -46,13 +46,15 @@ const handleResponse = (response: QueryResponse) => {
 const isUserProfileAvail = (data: UserProfile | null) =>
   data && data.length > 0;
 
-const handleSuccess = (data: UserProfile) => {
-  const { id, ...dataWithoutId } = data[0];
-  return NextResponse.json(
-    createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
-    { status: STATUS_OK },
-  );
-};
+const handleSuccess = (data: UserProfile) => NextResponse.json(
+  {
+    data,
+    status: 200,
+  },
+  { status: STATUS_OK },
+);
+  // const { id, ...dataWithoutId } = data[0];
+  // createNetworkResponse({ data: dataWithoutId, status: STATUS_OK }),
 
 const handleUnexpectedError = () =>
   NextResponse.json(ErrorResponse.internalServerError(), {
