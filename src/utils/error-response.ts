@@ -16,4 +16,11 @@ export class ErrorResponse {
       error: { message },
     });
   }
+
+  static notFound(message: string) {
+    return createNetworkResponse({
+      status: STATUS.STATUS_NOT_FOUND,
+      error: { message },
+    });
+  }
 }

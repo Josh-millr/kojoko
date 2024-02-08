@@ -1,0 +1,1 @@
+export const MIN_DASHBOARD_VIEWPORT_WIDTH = 700;

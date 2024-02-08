@@ -24,4 +24,11 @@ export class UserDatabase {
       .update({ user_name: userName })
       .eq('user_id', userID);
   }
+
+  async fetchUserProfile(userID: string) {
+    return this.databaseInstance
+      .from('user_profiles')
+      .select()
+      .eq('id', userID);
+  }
 }

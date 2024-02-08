@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { UserState } from './_type';
-import * as actions from './user-actions';
+import { addUserProfile } from './actions/add-user-profile';
 
-const initialState = {} satisfies UserState;
+const initialState = {
+  profile: null,
+  isPresent: false,
+} as UserState;
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: { ...actions },
+  reducers: { addUserProfile },
 });
 
 export const userActions = userSlice.actions;

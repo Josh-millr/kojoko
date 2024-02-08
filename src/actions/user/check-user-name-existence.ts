@@ -3,7 +3,7 @@
 import { unstable_noStore as noStore } from 'next/cache';
 
 import { UserDatabase } from '@/services/user-database';
-import { ErrorResponse } from '@/services/error-response';
+import { ErrorResponse } from '@/utils/error-response';
 import { supabaseClient } from '@/libs/supabase-client';
 import { createNetworkResponse } from '@/utils/create-network-response';
 import { STATUS_OK, STATUS_NOT_FOUND } from '@/constants/network-status-codes';

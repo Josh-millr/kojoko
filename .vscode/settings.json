@@ -7,10 +7,12 @@
         "Kojoko",
         "linebreak",
         "nextjs",
+        "Postgrest",
         "reduxjs",
         "Supabase",
         "tailwindcss",
-        "toploader"
+        "toploader",
+        "usehooks"
     ],
     "cosine.AIProvider": "OpenAI",
     "cosine.AIModel": "Faster"
