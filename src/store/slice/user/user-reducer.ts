@@ -21,6 +21,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        // @ts-ignore @audit Fix the type error thrown
         state.profile = action.payload;
       })
       .addCase(fetchUserProfile.rejected, (state) => {

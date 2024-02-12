@@ -40,7 +40,7 @@ const handleError = (error: AxiosError<NetworkResponseWithError>) => {
 
   if (response) return handleResponseError(response.data.error);
   if (request) return handleRequestError();
-  return error;
+  throw error;
 };
 
 const handleResponseError = (error: NetworkError) => {
