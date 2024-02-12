@@ -6,3 +6,9 @@ export interface NetworkResponse<Data extends Json> {
   status: number;
   error: NetworkError | null;
 }
+
+export interface NetworkResponseWithError {
+  data: null;
+  status: number;
+  error: NetworkError;
+}

@@ -1,56 +1,57 @@
-import type { Dispatch } from '@reduxjs/toolkit';
+import type { AxiosError } from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { toast } from '@/components/ui/use-toast';
 import { backendApiClient } from '@/libs/axios-instance';
-import type { NetworkResponse } from '@/types/network-response';
+import type {
+  NetworkResponse,
+  NetworkResponseWithError,
+} from '@/types/network-response';
+import type { NetworkError } from '@/types/network-error';
 import type { UserProfileWithoutId } from '@/types/user-profile';
+import { addOnlineEventListener } from '@/utils/add-online-event-listener';
 
-import { userActions } from '../user-reducer';
-
-type ToastVariantType = 'destructive';
 type Response = NetworkResponse<UserProfileWithoutId>;
 
-export const fetchUserProfile = () => {
-  const fetchUserProfileAction = async (dispatch: Dispatch) => {
-    try {
-      const response = await backendApiClient.get<Response>('/user/profile');
-      handleResponse(response.data, dispatch);
-    } catch {
-      handleFailedRequest(dispatch);
-    }
-  };
+const URL_PATH = '/user/profile';
+const DISPATCH_TYPE = 'user/fetchUserProfile';
 
-  const handleResponse = (responseData: Response, dispatch: Dispatch) => {
-    const { data, error } = responseData;
-    if (data) {
-      dispatch(userActions.addUserProfile(data));
-    }
-    if (error) {
-      handleUnexpectedResponse(error.message);
-    }
-  };
+const action = async () => {
+  try {
+    const response = await backendApiClient.get<Response>(URL_PATH);
+    return handleResponse(response.data);
+  } catch (error) {
+    return handleError(error as AxiosError<NetworkResponseWithError>);
+  }
+};
 
-  const handleUnexpectedResponse = (message: string) => {
-    showToast('destructive', message);
-  };
+export const fetchUserProfile = createAsyncThunk(DISPATCH_TYPE, action);
 
-  const handleFailedRequest = (dispatch: Dispatch) => {
-    showToast('destructive', 'Network connection failed. Retrying...');
-    addOnlineEventListener(dispatch);
-  };
+const handleResponse = (response: Response) => {
+  const { data } = response;
+  if (!data) throw response;
+  return data;
+};
 
-  const addOnlineEventListener = (dispatch: Dispatch) => {
-    const onlineListener = () => {
-      // console.log('You are now connected to the network.');
-      window.removeEventListener('online', onlineListener);
-      fetchUserProfileAction(dispatch);
-    };
-    window.addEventListener('online', onlineListener);
-  };
+const handleError = (error: AxiosError<NetworkResponseWithError>) => {
+  // @note Response Error check should take precedence over request error check,
+  // axios populate both properties when theres a response error.
+  const { response, request } = error;
 
-  const showToast = (variant: ToastVariantType, message: string) => {
-    toast({ variant, description: message });
-  };
+  if (response) return handleResponseError(response.data.error);
+  if (request) return handleRequestError();
+  return error;
+};
 
-  return fetchUserProfileAction;
+const handleResponseError = (error: NetworkError) => {
+  showToast(error.message);
+};
+
+const handleRequestError = () => {
+  showToast('Network connection failed. Retrying...');
+  addOnlineEventListener(action);
+};
+
+const showToast = (description: string) => {
+  toast({ variant: 'destructive', description });
 };

@@ -9,7 +9,7 @@ export const addUserProfile = (
   const update = {
     ...state,
     profile: action.payload,
-    isPresent: true,
+    // isPresent: true,
   } satisfies UserState;
 
   return update;
