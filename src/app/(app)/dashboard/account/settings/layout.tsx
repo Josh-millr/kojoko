@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import * as Layout from '../../_components/dashboard-layout';
 import { DashboardPageHeader } from '../../_components/dashboard-page-header';
+import { SettingsExitNavigation } from '../../_components/settings-exit-navigation';
 
 interface AccountSettingsLayoutProps {
   children: ReactNode;
@@ -12,8 +13,9 @@ export default function AccountSettingsLayout(
   return (
     <Layout.DashboardLayoutViewport>
       <Layout.DashboardLayoutSideBar>
-        <></>
-        {/* Navigation links goes here... */}
+        <Layout.DashboardLayoutSideBarSection>
+          <SettingsExitNavigation />
+        </Layout.DashboardLayoutSideBarSection>
       </Layout.DashboardLayoutSideBar>
       <Layout.DashboardLayoutMain>
         <DashboardPageHeader />
